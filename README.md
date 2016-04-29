@@ -1,6 +1,6 @@
 # docker-iometer
 
-docker build -t iomemter .
+docker build -t iometer .
 
 # Launch iometer and dynamo
 
