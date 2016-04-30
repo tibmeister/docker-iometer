@@ -9,9 +9,9 @@ docker build -t iometer .
 ## Launch iometer and dynamo
 1. Launch iometer on the remote machine.
 2. Launch the container on the Linux machine:
-
+```bash
 docker run -it -h mycontainer --net host --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME
-
+```
 Please note that the command uses a --net host parameter to directly bind the container to the host's nework card. You need to do this because dynamo selects a random port to listen for messages from iometer. If it uses a fixed port, we could have used -p switch to map the specific port.
 
 For dynamo and iometer to connect to each other, you need port 1006 (that iomemter listens to) and the random port picked by dynamo to be open. The easiest way is to close firewalls on both sides.
