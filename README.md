@@ -19,20 +19,34 @@ For dynamo and IOMeter to connect to each other, you need port 1006 (that IOMete
 
 ## Run the test
 In IOMeter, define a new Access Specification with the following settings:
-Transfer Req Size = 4k (or multiples thereof)
-Read/Write = 40/60
-Random/Sequential = 30/70
 
-Also in iometer, define Maximum Disk Size on the Disk Targets tab. This is to avoid host disk being filled up by test data. If you are using a separate data volume that is of the correct size, you can skip this step.
+In IOmeter, define Maximum Disk Size on the Disk Targets tab. This is to avoid host disk being filled up by test data. If you are using a separate data volume that is of the correct size, you can skip this step.
 Rule of thumb for disk size: one sector is 512 B, so 
 
-| Sectors | Approx File Size |
-|:-------:|:----------------:|
-| 204800  | ~100MB           |
-| 1048576 | ~512MB           |
-| 524288  | ~256MB           |
+|Sectors|Approx File Size |
+|:-----:|:---------------:|
+|204800|~100MB|
+|1048576|~512MB|
+|524288|~256MB|
 
-Set up other parts of the test profile and launch the test.
+Set up other parts of the test profile and launch the test such as:
+*Disk Targets Tab
+|Setting|Value|
+|:-----:|:---:|
+|Outstanding I/Os|32|
+|Write IO Data Pattern|Pseudo random|
+
+*Define a new Access Specification
+|Setting|Value|
+|:-----:|:---:|
+|Transfer Req Size|4k (or multiples thereof)|
+|Read/Write|40/60|
+|Random/Sequential|30/70|
+
+*Test Setup
+|Setting|Value|
+|:-----:|:---:|
+|Run Time|10 Minutes (minimum)|
 
 ## Some other items for consideration
 If you are behind a proxy, modify the 01proxy file and fill in the information.  This will allow Aptitude to traverse your proxy
