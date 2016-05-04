@@ -1,8 +1,23 @@
 FROM ubuntu:14.04
+
 MAINTAINER tibmeister
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y wget libaio1 libaio-dev
-RUN wget -O /download http://sourceforge.net/projects/iometer/files/iometer-stable/1.1.0/iometer-1.1.0-linux.x86_64-bin.tar.bz2
-RUN tar -xvjf /download
-RUN mkdir /localdata
-VOLUME /localdata
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+ADD ["/01proxy","/etc/apt/apt.conf.d/01proxy"]
+
+RUN ["apt-get","update"]
+RUN ["apt-get","install","-y","wget","libaio1","libaio-dev"]
+RUN ["apt-get","autoremove","-y"]
+RUN ["apt-get","autoclean","all"]
+
+ADD ["/dynamo","/dynamo"]
+
+RUN ["mkdir","/localdata"]
+RUN ["mkdir","/data"]
+
+VOLUME ["/localdata"]
+
+LABEL version="1.0"
+LABEL description "To run try this \
+docker run -it -h mycontainer --net host --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME"
