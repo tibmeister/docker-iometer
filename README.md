@@ -30,14 +30,15 @@ Rule of thumb for disk size: one sector is 512 B, so
 |524288|~256MB|
 
 Set up other parts of the test profile and launch the test such as:
-+ Disk Targets Tab
+
++ **Disk Targets Tab**
 
 |Setting|Value|
 |:-----:|:---:|
 |Outstanding I/Os|32|
 |Write IO Data Pattern|Pseudo random|
 
-+ Define a new Access Specification
++ **Define a new Access Specification**
 
 |Setting|Value|
 |:-----:|:---:|
@@ -45,7 +46,7 @@ Set up other parts of the test profile and launch the test such as:
 |Read/Write|40/60|
 |Random/Sequential|30/70|
 
-+ Test Setup
++ **Test Setup**
 
 |Setting|Value|
 |:-----:|:---:|
@@ -61,5 +62,6 @@ fallocate -l 512M test
 docker run -it -h mycontainer --net host -v ./test:/data --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME
 ```
 
-> Notice the *-v* switch, this is the volume switch in the format of <host directory/file>:<directory in container>.  The Dockerfile already has the /data directory created, so just pass the argument here and you're golden.  
-Don't pass anything, no problem! /data in the container will just be another folder out there.
+> Notice the -v switch, this is the volume switch in the format of `<host directory/file`>:`<directory in container`>.  
+> The Dockerfile already has the /data directory created, so just pass the argument here and you're golden.  
+> Don't pass anything, no problem! /data in the container will just be another folder out there.
