@@ -6,16 +6,21 @@
 ```bash
 docker build -t iometer .
 ```
+
+> The dif directory as well as the License and README.md (this) file are excluded from the building of the docker container.
+> dif stands for "Docker Included Files" and includes extra files such as the Windows binaries of IOmeter (x86_64).
+
 ## Launch iometer and dynamo
 1. Launch iometer on the remote machine.
 2. Launch the container on the Linux machine:
 ```bash
 docker run -it -h mycontainer --net host --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME
 ```
-> Please note that the command uses a --net host parameter to directly bind the container to the host's nework card. You need to do this because dynamo selects a random port to listen for messages from iometer. If it uses a fixed 
-port, we could have used -p switch to map the specific port.
 
-For dynamo and IOMeter to connect to each other, you need port 1006 (that IOMeter listens to) and the random port picked by dynamo to be open. The easiest way is to shutdown firewalls on both sides.
+> Please note that the command uses a **--net host** parameter to directly bind the container to the host's nework card. You need to do this because dynamo selects a random port to listen for messages from iometer. 
+
+> For dynamo and IOMeter to connect to each other, you need port **1006** (that IOMeter listens to) and the random port picked by dynamo to be open. 
+> The easiest way is to shutdown firewalls on both sides.
 
 ## Run the test
 In IOMeter, define a new Access Specification with the following settings:
@@ -53,7 +58,7 @@ Set up other parts of the test profile and launch the test such as:
 |Run Time|10 Minutes (minimum)|
 
 ## Some other items for consideration
-If you are behind a proxy, modify the 01proxy file and fill in the information.  This will allow Aptitude to traverse your proxy
+If you are behind a proxy, modify the *01proxy* file and fill in the information.  This will allow Aptitude to traverse your proxy
 
 If you are wanting to test a mounted filesystem, create a file of the desired size, format it, then mount it as /data into the container at runtime as follows:
 
@@ -62,6 +67,6 @@ fallocate -l 512M test
 docker run -it -h mycontainer --net host -v ./test:/data --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME
 ```
 
-> Notice the -v switch, this is the volume switch in the format of `<host directory/file`>:`<directory in container`>.  
+> Notice the **-v** switch, this is the volume switch in the format of **`<host directory/file`>:`<directory in container`>**.  
 > The Dockerfile already has the /data directory created, so just pass the argument here and you're golden.  
 > Don't pass anything, no problem! /data in the container will just be another folder out there.
