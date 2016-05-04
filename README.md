@@ -25,8 +25,9 @@ Random/Sequential = 30/70
 
 Also in iometer, define Maximum Disk Size on the Disk Targets tab. This is to avoid host disk being filled up by test data. If you are using a separate data volume that is of the correct size, you can skip this step.
 Rule of thumb for disk size: one sector is 512 B, so 
+
 | Sectors | Approx File Size |
-|"-------:|:----------------:|
+|:-------:|:----------------:|
 | 204800  | ~100MB           |
 | 1048576 | ~512MB           |
 | 524288  | ~256MB           |
