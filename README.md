@@ -56,7 +56,7 @@ If you are wanting to test a mounted filesystem, create a file of the desired si
 ```bash
 fallocate -l 512M test
 docker run -it -h mycontainer --net host -v ./test:/data --rm iometer /dynamo -i {remote IOMeter host} -m $HOSTNAME
-```bash
+```
 
 > Notice the *-v* switch, this is the volume switch in the format of <host directory/file>:<directory in container>.  The Dockerfile already has the /data directory created, so just pass the argument here and you're golden.  
 Don't pass anything, no problem! /data in the container will just be another folder out there.
